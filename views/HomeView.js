@@ -6,7 +6,7 @@ import GameOverView from "./GameOverView";
 import GameView from "./GameView";
 import StartGameView from "./StartGameView";
 
-export default function Home() {
+export default function HomeView() {
   const [correctNumber, setCorrectNumber] = useState(0);
   const [guessRounds, setGuessRounds] = useState(0);
 
