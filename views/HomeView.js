@@ -10,33 +10,25 @@ export default function HomeView() {
   const [correctNumber, setCorrectNumber] = useState(0);
   const [guessRounds, setGuessRounds] = useState(0);
 
-  // ฟังก์ชันสำหรับการเริ่มเกมใหม่
-  // const configureNewGameHandler = () => {
-  //   ...เพิ่มโค้ด...อัพเดทค่าสเตท guessRounds ให้เป็น 0
-  //   ...เพิ่มโค้ด...อัพเดทค่าสเตท correctNumber ให้เป็น 0
-  // };
+  const configureNewGameHandler = () => {
+    setGuessRounds(0);
+    setCorrectNumber(0);
+  };
 
   const startGameHandler = (rndNum) => {
     setCorrectNumber(rndNum);
   };
 
-  // ฟังก์ชันสำหรับจัดการการจบเกม
-  // const gameOverHandler = (numOfRounds) => {
-  //   ...เพิ่มโค้ด...อัพเดทค่าสเตท guessRounds ด้วยค่า numOfRounds ที่รับมา
-  // };
+  const gameOverHandler = (numOfRounds) => {
+    guessRounds(numOfRounds);
+  };
 
   let content = <StartGameView onStartGame={startGameHandler} />;
 
   if (correctNumber > 0 && guessRounds <= 0) {
-    // ทำการเรียก GameView
-    // content = (
-    //   <GameView ...เขียนโค้ดเพิ่ม... />
-    // );
-  } else if (guessRounds > 0) {
-    // ทำการเรียก GameOverView
-    // content = (
-    //   <GameOverView ...เขียนโค้ดเพิ่ม... />
-    // );
+    content = <GameView />;
+  } else if (guessRounds > 3) {
+    content = <GameOverView />;
   }
 
   return (
