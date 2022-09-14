@@ -6,11 +6,7 @@ import Colors from "../constants/colors";
 const StartGameView = (props) => {
   return (
     <View style={styles.View}>
-      <TouchableOpacity
-        onPress={() => {
-          // ...เพิ่มโค้ด...
-        }}
-      >
+      <TouchableOpacity>
         <Text category="h2" style={styles.glow}>
           START
         </Text>
