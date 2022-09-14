@@ -3,19 +3,38 @@ import { View, StyleSheet, Button } from "react-native";
 import { Text } from "@ui-kitten/components";
 import Colors from "../constants/colors";
 
-const GameOverView = (props) => {
+const GameOverView = ({
+  configureNewGameHandler,
+  guessRounds,
+  correctNumber,
+}) => {
   return (
     <View style={styles.container}>
       <Text category="h2" style={styles.mainText}>
         Game Over !
       </Text>
-      {/* ...เพิ่มโค้ด สรุปผลลัพธ์การเล่นเกม และมีปุ่มให้เริ่มเกมใหม่ได้... */}
-      <Text category="h2" style={styles.score}>
-        0
-      </Text>
-      <Text category="h2" style={{ color: "white" }}>
-        scores
-      </Text>
+      <View
+        style={{
+          marginBottom: 65,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text category="h5" style={styles.pills}>
+          You've guessed {guessRounds} rounds
+        </Text>
+        <Text category="h5" style={styles.pills}>
+          The number was
+        </Text>
+        <Text category="h2" style={styles.score}>
+          {correctNumber}
+        </Text>
+        <Button
+          title="NEW GAME"
+          color={Colors.accent}
+          onPress={configureNewGameHandler}
+        />
+      </View>
     </View>
   );
 };
@@ -28,6 +47,7 @@ const styles = StyleSheet.create({
   },
   mainText: {
     fontSize: 42,
+    marginBottom: 25,
     color: "#ed1520",
     textShadow: `
     0 5px 15px rgba(255, 200, 206, 0.65),
@@ -40,6 +60,13 @@ const styles = StyleSheet.create({
   score: {
     color: "white",
     fontSize: 150,
+    lineHeight: "150%",
+  },
+  pills: {
+    backgroundColor: "rgba(5, 8, 8, .55)",
+    color: "white",
+    paddingHorizontal: 20,
+    borderRadius: 30,
   },
 });
 
