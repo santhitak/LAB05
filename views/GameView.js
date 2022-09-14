@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -9,39 +9,58 @@ import {
 import { Text } from "@ui-kitten/components";
 import Colors from "../constants/colors";
 
-const GameView = (props) => {
-  // ...เพิ่มโค้ดกำหนด state...
+const GameView = ({ correctNumber, onOver }) => {
+  const [guess, setGuess] = useState("");
+
+  const [round, setRound] = useState(0);
+  const [guessNum, setGuessNum] = useState(0);
+  const [confirmed, setConfirmed] = useState(false);
+  const [enteredValue, setEnteredValue] = useState("");
 
   let confirmedOutput;
 
-  // ส่วนแสดงผลลัพธ์การทายตัวเลขของผู้เล่น
-  // if (confirmed) {
-  //   confirmedOutput = (
-  //     <View style={styles.resultContainer}>
-  //       <Text>You selected</Text>
-  //       <View style={styles.numberContainer}>
-  //         <Text style={styles.number}>...เพิ่มโค้ด แสดงตัวเลขของผู้เล่น...</Text>
-  //       </View>
-  //       <Text>...เพิ่มโค้ด แสดงผลลัพธ์การทายตัวเลข...</Text>;
-  //     </View>
-  //   );
-  // }
+  const check = (val) => {
+    if (correctNumber > val) {
+      setGuess("Too Low");
+    } else if (correctNumber < val) {
+      setGuess("Too High");
+    } else if (correctNumber === val) {
+      setGuess("Correct");
+    }
+  };
 
-  // ฟังก์ชันสำหรับอัพเดทค่าที่ผู้เล่นกรอกให้กับสเตท enteredValue
-  // const numberInputHandler = (inputText) => {
-  //   ...เพิ่มโค้ด...อัพเดทค่าสเตท enteredValue ด้วยค่า inputText ที่รับมา
-  // };
+  if (confirmed) {
+    confirmedOutput = (
+      <View style={styles.resultContainer}>
+        <Text style={{ color: "white" }}>You selected</Text>
+        <View style={styles.numberContainer}>
+          <Text style={styles.number}>{guessNum}</Text>
+        </View>
+        <Text style={{ color: "white" }} category="h3">
+          {guess}
+        </Text>
+        ;<Text style={{ color: "white" }}>{round} rounds guessed.</Text>
+      </View>
+    );
+  }
 
-  // ฟังก์ชันสำหรับเคลียร์ค่าในสเตท enteredValue
-  // const resetInputHandler = () => {
-  //   ...เพิ่มโค้ด...อัพเดทค่าสเตท enteredValue ให้เป็น ""
-  // };
+  const numberInputHandler = (inputText) => {
+    setEnteredValue(inputText);
+  };
 
-  // ฟังก์ชันสำหรับอัพเดทค่าสเตทต่างๆ เมื่อผู้เล่นกด confirm
-  // const confirmInputHandler = () => {
-  //   ...เพิ่มโค้ด แปลงค่า enteredValue ให้เป็นตัวเลข
-  //   ...เพิ่มโค้ด อัพเดทค่าในสเตทต่างๆ ตามที่กำหนด
-  // };
+  const resetInputHandler = () => {
+    setEnteredValue("");
+  };
+
+  const confirmInputHandler = () => {
+    let val = parseInt(enteredValue);
+    setGuessNum(val);
+    check(val);
+    setRound(round + 1);
+    setGuessNum(val);
+    if (val === correctNumber) onOver(round || 1);
+    setConfirmed(true);
+  };
 
   return (
     <View style={styles.container}>
@@ -61,21 +80,22 @@ const GameView = (props) => {
             autoCorrect={false}
             keyboardType="number-pad"
             maxLength={2}
-            //...เพิ่ม property value และ onChangeText...
+            value={enteredValue}
+            onChange={numberInputHandler}
           />
           <View style={styles.buttonContainer}>
             <View>
               <Button
                 title="Reset"
                 color={Colors.accent}
-                // ...เพิ่ม property onPress...
+                onPress={resetInputHandler}
               />
             </View>
             <View>
               <Button
                 title="Confirm"
                 color={Colors.primary}
-                // ...เพิ่ม property onPress...
+                onPress={confirmInputHandler}
               />
             </View>
           </View>
@@ -125,6 +145,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "grey",
     borderBottomWidth: 1,
     marginVertical: 10,
+    fontSize: 30,
   },
   resultContainer: {
     marginTop: 20,
