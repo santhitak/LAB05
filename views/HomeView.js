@@ -20,7 +20,7 @@ export default function HomeView() {
   };
 
   const gameOverHandler = (numOfRounds) => {
-    guessRounds(numOfRounds);
+    setGuessRounds(numOfRounds);
   };
 
   let content = <StartGameView onStartGame={startGameHandler} />;
@@ -52,7 +52,7 @@ export default function HomeView() {
           uri: "https://i.pinimg.com/736x/4f/da/a5/4fdaa5eb789e923a53635c3007660b2b--bit-art-tokyo-japan.jpg",
         }}
         resizeMode="cover"
-        style={{ width: "100%", height: "101%" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <Header title="Guess a Number" />
         {content}
