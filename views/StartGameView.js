@@ -3,10 +3,14 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../constants/colors";
 
-const StartGameView = (props) => {
+const StartGameView = ({ onStartGame }) => {
+  const ran = () => {
+    Math.floor(Math.random() * 100);
+    console.log(Math.floor(Math.random() * 100));
+  };
   return (
     <View style={styles.View}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => onStartGame(ran)}>
         <Text category="h2" style={styles.glow}>
           START
         </Text>
