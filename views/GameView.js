@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Button,
+  TextInput,
+  ImageBackground,
+} from "react-native";
+import { Text } from "@ui-kitten/components";
 import Colors from "../constants/colors";
 
 const GameView = (props) => {
@@ -37,44 +44,58 @@ const GameView = (props) => {
   // };
 
   return (
-    <View style={styles.View}>
-      <View style={styles.card}>
-        <Text>Guess a Number</Text>
-        <TextInput
-          style={styles.input}
-          blurOnSubmit
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="number-pad"
-          maxLength={2}
-          //...เพิ่ม property value และ onChangeText...
-        />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              title="Reset"
-              color={Colors.accent}
-              // ...เพิ่ม property onPress...
-            />
-          </View>
-          <View style={styles.button}>
-            <Button
-              title="Confirm"
-              color={Colors.primary}
-              // ...เพิ่ม property onPress...
-            />
+    <View style={styles.container}>
+      <ImageBackground
+        source={{
+          uri: "https://i.pinimg.com/736x/4f/da/a5/4fdaa5eb789e923a53635c3007660b2b--bit-art-tokyo-japan.jpg",
+        }}
+        resizeMode="cover"
+        style={styles.wrapping}
+      >
+        <View style={styles.card}>
+          <Text category="h4">Guess a Number</Text>
+          <TextInput
+            style={styles.input}
+            blurOnSubmit
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={2}
+            //...เพิ่ม property value และ onChangeText...
+          />
+          <View style={styles.buttonContainer}>
+            <View>
+              <Button
+                title="Reset"
+                color={Colors.accent}
+                // ...เพิ่ม property onPress...
+              />
+            </View>
+            <View>
+              <Button
+                title="Confirm"
+                color={Colors.primary}
+                // ...เพิ่ม property onPress...
+              />
+            </View>
           </View>
         </View>
-      </View>
-      {confirmedOutput}
+        {confirmedOutput}
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  View: {
+  container: {
+    width: "100%",
+    height: "100%",
+  },
+  wrapping: {
+    width: "100%",
+    height: "101%",
     flex: 1,
-    padding: 10,
+    justifyContent: "center",
     alignItems: "center",
   },
   buttonContainer: {
