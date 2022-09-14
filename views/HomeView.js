@@ -25,11 +25,9 @@ export default function HomeView() {
 
   let content = <StartGameView onStartGame={startGameHandler} />;
 
-  if (correctNumber > 0 && guessRounds <= 0) {
-    content = <GameView />;
-  } else if (guessRounds > 3) {
-    content = <GameOverView />;
-  }
+  // correctNumber > 0 && guessRounds <= 0
+  //   ? (content = <GameView />)
+  //   : (content = <GameOverView />);
 
   return (
     <Layout
