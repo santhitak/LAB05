@@ -44,7 +44,7 @@ const GameView = ({ correctNumber, onOver }) => {
     let val = parseInt(enteredValue);
     setGuessNum(val);
     setRound(round + 1);
-    if (val === correctNumber) onOver(round);
+    if (val === correctNumber) onOver(round || 1);
     setConfirmed(true);
   };
 
